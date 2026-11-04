@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8"><title>Compatible Dialog</title>
+<script src="../src/dialog.js"></script>
+<button id="launch">Open question</button>
+<dialog><form><label>Answer <input name="answer" value="yes"></label><button>Submit</button></form>
+<button id="dismiss" type="button" data-response="cancel">Cancel</button></dialog>
+<output>Ready</output>
+<script>
+  const question = document.querySelector('dialog');
+  const status = document.querySelector('output');
+  dialogFormsBindAll(question);
+  dialogFormBindButton(question, document.querySelector('#dismiss'));
+  document.querySelector('#launch').onclick = () => dialogOpen(question).then(
+    result => { status.value = result.formData.get('answer'); },
+    () => { status.value = 'Dismissed'; }
+  );
+</script>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "@convinciblemedia/compatible-dialog",
+  "version": "0.1.0",
+  "private": true,
+  "browser": "src/dialog.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.0"
+  }
+}
