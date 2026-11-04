@@ -47,6 +47,13 @@ for (const fallback of [false, true]) {
     await page.locator('#dismiss').click();
     await expect(dialog).not.toBeVisible();
     expect(await dialog.evaluate(el => el.returnValue)).toBe('cancel');
+    await page.locator('#launch').click();
+    await expect(dialog).toBeVisible();
+    const bounds = await dialog.boundingBox();
+    await page.mouse.click(bounds.x + 5, bounds.y + 5);
+    await expect(dialog).toBeVisible();
+    await page.mouse.click(2, 2);
+    await expect(dialog).not.toBeVisible();
     expect(resources.length).toBe(fallback ? 2 : 0);
   });
 }
