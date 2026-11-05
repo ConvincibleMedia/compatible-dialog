@@ -1,13 +1,4 @@
-const { test, expect } = require('@playwright/test');
-const path = require('node:path');
-
-const files = {
-  '/': 'test/wrapper.html',
-  '/src/dialog.js': 'src/dialog.js',
-  '/src/polyfill/dialog.js': 'src/polyfill/dialog.js',
-  '/src/polyfill/dialog.css': 'src/polyfill/dialog.css'
-};
-
+const { test, expect } = require('../support/test');
 // Serve the actual shipped assets through the browser's request pipeline.
 async function openFixture(page, fallback, failFirstStyle = false) {
   const resources = [];
@@ -18,17 +9,16 @@ async function openFixture(page, fallback, failFirstStyle = false) {
     delete prototype.close;
     window.HTMLDialogElement = undefined;
   });
-  await page.route('http://component.test/**', async route => {
+  await page.route('**/dist/polyfill/**', async route => {
     const pathname = new URL(route.request().url()).pathname;
     if (pathname.includes('/polyfill/')) resources.push(pathname);
     if (failFirstStyle && pathname.endsWith('.css')) {
       failFirstStyle = false;
       return route.abort();
     }
-    if (!files[pathname]) return route.fulfill({ status: 404, body: '' });
-    return route.fulfill({ path: path.join(__dirname, '..', files[pathname]) });
+    return route.continue();
   });
-  await page.goto('http://component.test/');
+  await page.goto('/fixtures/wrapper.html');
   return resources;
 }
 

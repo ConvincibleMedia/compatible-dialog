@@ -33,4 +33,8 @@
 .netlify
 
 node_modules/
-test-results/
+
+# Generated test evidence
+tests/results/
+tests/report/
+tests/evidence/

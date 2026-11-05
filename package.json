@@ -2,14 +2,23 @@
   "name": "@convinciblemedia/compatible-dialog",
   "version": "0.1.0",
   "private": true,
-  "browser": "src/dialog.js",
+  "browser": "dist/dialog.js",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
-    "test": "playwright test"
+    "build": "node scripts/build.js",
+    "build:min": "npm run build",
+    "lint": "npm run build && eslint .",
+    "serve": "npm run build && node tests/support/server.js",
+    "test": "npm run build && playwright test --config tests/playwright.config.js",
+    "test:headed": "npm test -- --headed",
+    "test:install": "playwright install chromium firefox webkit"
   },
   "devDependencies": {
-    "@playwright/test": "1.58.0"
-  }
+    "@playwright/test": "1.58.0",
+    "eslint": "9.39.2",
+    "uglify-js": "3.19.3"
+  },
+  "main": "dist/dialog.js"
 }
