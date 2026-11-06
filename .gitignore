@@ -1,8 +1,4 @@
-# Essential
-.git
-.env
-
-# Windows
+# Platform
 *.lnk
 *.db
 *.ini
@@ -10,31 +6,32 @@
 # Temp/cache/logs
 *.log
 *.map
-.jekyll-metadata
-.sass-cache/
-.jekyll-cache/
 /tmp/
-.rspec_status
 */cache/
 
-# Working files/dirs
-/.bundle/
-/.yardoc
-/_yardoc/
+# Language/tools
+## Node
+node_modules/
+
+# Settings
+.env
+agents.md
+.agents
+.codex
+.vscode
+docs/environment/local.md
+docs/environment/local/
+
+# Build
+/public/
+
+# Project
+## Generated
 /coverage/
 /doc/
 /pkg/
-/spec/reports/
 
-# Public output
-/public/
-
-# Local Netlify folder
-.netlify
-
-node_modules/
-
-# Generated test evidence
+## Testing
 tests/results/
 tests/report/
 tests/evidence/
